@@ -13,13 +13,14 @@ import javax.swing.JOptionPane;
 public class AtualizarJogador extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(AtualizarJogador.class.getName());
+    private final GerenciamentoJogador gerenciamentoJogador = GerenciamentoJogador.getInstancia(10);
 
     /**
      * Creates new form AdicionaJogador
      */
     public AtualizarJogador() {
         
-        if(GerenciamentoJogador.listarJogadores().isEmpty()){
+        if(gerenciamentoJogador.listarJogadores().isEmpty()){
             JOptionPane.showMessageDialog(  null, 
                                             "Não existe jogador no sistema",
                                             "Erro",
@@ -164,9 +165,9 @@ public class AtualizarJogador extends javax.swing.JFrame {
             );
             return;
         }
-        System.out.println( GerenciamentoJogador.listarJogadores());
+        System.out.println( gerenciamentoJogador.listarJogadores());
         
-        if(GerenciamentoJogador.buscarJogador(id) == null){
+        if(gerenciamentoJogador.buscarJogador(id) == null){
             JOptionPane.showMessageDialog(  null, 
                                             "Não existe jogador com esse login",
                                             "Erro",
@@ -175,7 +176,7 @@ public class AtualizarJogador extends javax.swing.JFrame {
             return;
         }
         
-        GerenciamentoJogador.atualizarJogadorSimples(id, nome, login, senha);
+        gerenciamentoJogador.atualizarJogadorSimples(id, nome, login, senha);
         JOptionPane.showMessageDialog(
                                         null,
                                         nome + " adicionado com sucesso!",
@@ -191,7 +192,7 @@ public class AtualizarJogador extends javax.swing.JFrame {
         // TODO add your handling code here:
         
         int    id    = (int) idTF.getValue();
-        Jogador jogador = GerenciamentoJogador.buscarJogador(id);
+        Jogador jogador = gerenciamentoJogador.buscarJogador(id);
         if(jogador != null){
             nomeTF.setText(jogador.getNome());
             loginTF.setText(jogador.getLogin());
@@ -212,7 +213,7 @@ public class AtualizarJogador extends javax.swing.JFrame {
     private void idTFKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_idTFKeyTyped
         // TODO add your handling code here:
         int    id    = (int) idTF.getValue();
-        Jogador jogador = GerenciamentoJogador.buscarJogador(id);
+        Jogador jogador = gerenciamentoJogador.buscarJogador(id);
         if(jogador != null){
             nomeTF.setText(jogador.getNome());
             loginTF.setText(jogador.getLogin());

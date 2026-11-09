@@ -13,6 +13,7 @@ import javax.swing.JOptionPane;
 public class AdicionaJogador extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(AdicionaJogador.class.getName());
+    private final GerenciamentoJogador gerenciamentoJogador = GerenciamentoJogador.getInstancia(10);
 
     /**
      * Creates new form AdicionaJogador
@@ -139,9 +140,9 @@ public class AdicionaJogador extends javax.swing.JFrame {
             );
             return;
         }
-        System.out.println( GerenciamentoJogador.listarJogadores());
+        System.out.println( gerenciamentoJogador.listarJogadores());
         
-        if(GerenciamentoJogador.verificarLoginValido(login) != null){
+        if(gerenciamentoJogador.verificarLoginValido(login) != null){
             JOptionPane.showMessageDialog(  null, 
                                             "Esse login já está em uso",
                                             "Erro",
@@ -150,7 +151,7 @@ public class AdicionaJogador extends javax.swing.JFrame {
             return;
         }
         
-        GerenciamentoJogador.adicionarJogador(nome, login, senha);
+        gerenciamentoJogador.adicionarJogador(nome, login, senha);
         JOptionPane.showMessageDialog(
                                         null,
                                         nome + " adicionado com sucesso!",

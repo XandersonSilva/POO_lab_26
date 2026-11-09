@@ -11,8 +11,9 @@ import javax.swing.JOptionPane;
  * @author aluno
  */
 public class JogoN {
-
+    
     public static void main(String[] args) {
+//        GerenciamentoJogador.getInstancia(10);
         TelaInicial login = new TelaInicial();
         login.setVisible(true);
         

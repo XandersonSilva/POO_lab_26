@@ -1,20 +1,18 @@
 package com.mycompany.jogo.n;
 
-import java.util.List;
-import java.util.ArrayList;
-
 public class GerenciamentoJogador {
     private static int maxQtdJogadores = 20;
     private static Jogador jogadores[] = new Jogador[maxQtdJogadores];
     private static int id = 0;
     public  static int contador = 500;
+    private static GerenciamentoJogador instancia = null;
 
-    public GerenciamentoJogador(int qtdJogadores) {
-        this.maxQtdJogadores = qtdJogadores;
+    private GerenciamentoJogador(int qtdJogadores) {
+        GerenciamentoJogador.maxQtdJogadores = qtdJogadores;
         jogadores = new Jogador[maxQtdJogadores];
     }
 
-    public static void adicionarJogador( String nome, String login, String senha) {
+    public void adicionarJogador( String nome, String login, String senha) {
         if (GerenciamentoJogador.id < GerenciamentoJogador.maxQtdJogadores) {
             GerenciamentoJogador.jogadores[GerenciamentoJogador.id] = new Jogador(nome, login, senha);
             ++GerenciamentoJogador.id;
@@ -24,7 +22,7 @@ public class GerenciamentoJogador {
     }
     
     //BUSCAR JOGADOR
-    public static Jogador buscarJogador(int id) {
+    public Jogador buscarJogador(int id) {
     	int i;
     	for(i = 0; i < id; i++) {
     		if(jogadores[i].getId() == id)
@@ -34,7 +32,7 @@ public class GerenciamentoJogador {
     	return null;
     }
     //BUSCAR JOGADOR
-    public static Jogador verificarLoginValido(String login) {
+    public Jogador verificarLoginValido(String login) {
     	int i;
     	for(i = 0; i < id; i++) {
     		if(jogadores[i].getLogin().equals(login))
@@ -48,18 +46,18 @@ public class GerenciamentoJogador {
   //REMOVER JOGADOR
     public Boolean removerJogador(int busca) {
     	int i;
-    	if(busca == this.jogadores[this.id-1].getId()) {
-    		this.jogadores[busca] = null;
-    		--this.id;
+    	if(busca == GerenciamentoJogador.jogadores[GerenciamentoJogador.id-1].getId()) {
+    		GerenciamentoJogador.jogadores[busca] = null;
+    		--GerenciamentoJogador.id;
     		return true;
     	}
     	
-    	for(i = 0; i < this.id -1; i++) {
-    		if(this.jogadores[i].getId() == busca) {
-	    		for(int j = i; j < this.id; j++) {
-	    	    	this.jogadores[j] = this.jogadores[j+1];
+    	for(i = 0; i < GerenciamentoJogador.id -1; i++) {
+    		if(GerenciamentoJogador.jogadores[i].getId() == busca) {
+	    		for(int j = i; j < GerenciamentoJogador.id; j++) {
+	    	    	GerenciamentoJogador.jogadores[j] = GerenciamentoJogador.jogadores[j+1];
 	    		}
-	    		--this.id;
+	    		--GerenciamentoJogador.id;
     			return true;
     		}
     	}
@@ -67,7 +65,7 @@ public class GerenciamentoJogador {
     	return false;
     }
 
-    public static String listarJogadores() {
+    public String listarJogadores() {
         String res = "";
         for (int i=0;i < id;++i) {
             res += jogadores[i].imprimirJogador();
@@ -91,11 +89,11 @@ public class GerenciamentoJogador {
         }
         
         var id_jogador = jogador.getId();
-        this.jogadores[id_jogador].setNome(nome);
-        this.jogadores[id_jogador].setLogin(login);
-        this.jogadores[id_jogador].setSenha(senha);
-        this.jogadores[id_jogador].setPontuacao(pontuacao);
-        this.jogadores[id_jogador].setVida(vida);
+        GerenciamentoJogador.jogadores[id_jogador].setNome(nome);
+        GerenciamentoJogador.jogadores[id_jogador].setLogin(login);
+        GerenciamentoJogador.jogadores[id_jogador].setSenha(senha);
+        GerenciamentoJogador.jogadores[id_jogador].setPontuacao(pontuacao);
+        GerenciamentoJogador.jogadores[id_jogador].setVida(vida);
         
         
         
@@ -104,7 +102,7 @@ public class GerenciamentoJogador {
         
     }
     
-    public static void atualizarJogadorSimples(
+    public void atualizarJogadorSimples(
             int busca,
             String nome,
             String login,
@@ -120,5 +118,16 @@ public class GerenciamentoJogador {
         jogadores[id_jogador].setNome(nome);
         jogadores[id_jogador].setLogin(login);
         jogadores[id_jogador].setSenha(senha);
+    }
+
+    public static GerenciamentoJogador getInstancia(int tam) {
+        if(instancia == null){
+            instancia = new GerenciamentoJogador(tam);
+        }
+        
+        return instancia;
+    }
+    public static GerenciamentoJogador getInstancia() {
+            return instancia;
     }
 }
